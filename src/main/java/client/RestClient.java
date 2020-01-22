@@ -2,18 +2,17 @@ package client;
 
 import static io.restassured.RestAssured.*;
 
-import endpoints.EndPoint;
 import io.restassured.response.Response;
+import utils.EndPointConstants;
 
 
-public class RestClient extends EndPoint {
+public class RestClient {
 
     private Response response;
 
     public Response post(Object body) {
         response = given().body(body)
-                .log().all()
-                .when().post(baseURI)
+                .when().post(EndPointConstants.BASE_URI)
                 .then().log().all()
                 .extract().response();
         return response;
@@ -21,7 +20,7 @@ public class RestClient extends EndPoint {
 
     public Response get(int userId) {
         response = given().pathParams("id", userId)
-                .get(userEndPoint)
+                .get(EndPointConstants.USER_ID)
                 .then().log().all()
                 .extract().response();
         return response;
@@ -29,8 +28,8 @@ public class RestClient extends EndPoint {
 
     public Response put(Object body, int userId) {
         response = given().pathParams("id", userId)
-                .body(body).log().all()
-                .when().put(userEndPoint)
+                .body(body)
+                .when().put(EndPointConstants.USER_ID)
                 .then().log().all()
                 .extract().response();
         return response;
@@ -38,8 +37,8 @@ public class RestClient extends EndPoint {
 
     public Response patch(Object body, int userId) {
         response = given().pathParams("id", userId)
-                .body(body).log().all()
-                .when().patch(userEndPoint)
+                .body(body)
+                .when().patch(EndPointConstants.USER_ID)
                 .then().log().all()
                 .extract().response();
         return response;
@@ -47,8 +46,9 @@ public class RestClient extends EndPoint {
 
     public Response delete(int userId) {
         response = given().pathParams("id", userId)
-                .delete(userEndPoint)
-                .then().log().all()
+                .delete(EndPointConstants.USER_ID)
+                .then()
+                .log().all()
                 .extract().response();
         return response;
     }

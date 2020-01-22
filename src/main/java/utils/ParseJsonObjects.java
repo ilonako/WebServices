@@ -27,13 +27,8 @@ public class ParseJsonObjects {
                 "https://s3.amazonaws.com/uifaces/faces/twitter/josephstein/128.jpg"));
 
         String json = new Gson().toJson(data);
+        savedDataIntoFile(json);
 
-        try (FileWriter file = new FileWriter("src/main/resources/savedUsers.json")) {
-            file.write(json);
-            file.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         return json;
     }
 
@@ -55,13 +50,8 @@ public class ParseJsonObjects {
         }
 
         String json = new Gson().toJson(data);
+        savedDataIntoFile(json);
 
-        try (FileWriter file = new FileWriter("src/main/resources/savedUsers.json")) {
-            file.write(json);
-            file.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         return json;
     }
 
@@ -72,13 +62,8 @@ public class ParseJsonObjects {
                     "Skiing");
 
         String json = new Gson().toJson(data);
+        savedDataIntoFile(json);
 
-        try (FileWriter file = new FileWriter("src/main/resources/savedUsers.json")) {
-            file.write(json);
-            file.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         return json;
     }
 
@@ -93,7 +78,17 @@ public class ParseJsonObjects {
             e.printStackTrace();
         }
 
-        UserData userData = new Gson().fromJson(result, UserData.class);
-        return userData;
+        return new Gson().fromJson(result, UserData.class);
+    }
+
+
+    //FileUtil
+    private void savedDataIntoFile(String json) {
+        try (FileWriter file = new FileWriter("src/main/resources/savedUsers.json")) {
+            file.write(json);
+            file.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

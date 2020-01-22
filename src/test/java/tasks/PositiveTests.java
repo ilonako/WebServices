@@ -1,47 +1,40 @@
 package tasks;
 
-import client.RestClient;
-import com.sun.istack.NotNull;
-import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import models.StatusCodeType;
 import org.testng.annotations.Test;
-import utils.ParseJsonObjects;
-import validations.Validator;
 
-import static io.restassured.RestAssured.*;
-import static org.hamcrest.Matchers.*;
+import static utils.StatusCodeType.*;
 
 public class PositiveTests extends BaseTest{
 
     @Test
     public void postSimpleUser() {
         Response post = client.post(jsonObjects.serializeListObjects());
-        validator.validateStatusCode(StatusCodeType.CREATED, post);
+        validator.validateStatusCode(CREATED, post);
     }
 
     @Test
     public void getSimpleUser() {
         Response get = client.get(userId);
-        validator.validateStatusCode(StatusCodeType.OK, get);
+        validator.validateStatusCode(OK, get);
     }
 
     @Test
     public void putUpdatesOnTheUser() {
-        Response put = client.put(jsonObjects.serializeUpdatedObject(false), userId);  //why does it not disappear?
-        validator.validateStatusCode(StatusCodeType.OK, put);
+        Response put = client.put(jsonObjects.serializeUpdatedObject(false), userId);
+        validator.validateStatusCode(OK, put);
     }
 
     @Test
     public void patchUpdatesOnTheUser() {
         Response patch = client.patch(jsonObjects.serializeUpdatedObject(true), userId);
-        validator.validateStatusCode(StatusCodeType.OK, patch);
+        validator.validateStatusCode(OK, patch);
     }
 
     @Test
     public void deleteSimpleUser() {
         Response delete = client.delete(userId);
-        validator.validateStatusCode(StatusCodeType.NO_CONTENT, delete); //why does it not delete?
+        validator.validateStatusCode(NO_CONTENT, delete);
     }
 
 }

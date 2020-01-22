@@ -21,7 +21,6 @@ public class BaseTest {
     @BeforeClass
     public RequestSpecification setRequestSpecification() {
         RequestSpecification requestSpec = new RequestSpecBuilder()
-                .setAccept(ContentType.JSON)
                 .setContentType(ContentType.JSON)
                 .log(LogDetail.ALL)
                 .build();

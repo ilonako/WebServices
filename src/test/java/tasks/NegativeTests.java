@@ -1,7 +1,7 @@
 package tasks;
 
 import io.restassured.response.Response;
-import models.StatusCodeType;
+import utils.StatusCodeType;
 import org.testng.annotations.Test;
 
 public class NegativeTests extends BaseTest {
